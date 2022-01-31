@@ -67,6 +67,8 @@ func GetPersonById(id string) (Person, error) {
 		return Person{}, err
 	}
 
+	defer stmt.Close()
+
 	person := Person{}
 
 	sqlErr := stmt.QueryRow(id).Scan(&person.Id, &person.FirstName, &person.LastName, &person.Email, &person.IpAddress)
